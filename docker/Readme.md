@@ -1,13 +1,13 @@
-# ã‚¤ãƒ¡ãƒ¼ã‚¸ã®ãƒ“ãƒ«ãƒ‰
+# ƒCƒ[ƒW‚Ìƒrƒ‹ƒh
 $ Docker-Compose build
 
-# ã‚³ãƒ³ãƒ†ãƒŠã®ä½œæˆ
+# ƒRƒ“ƒeƒi‚Ìì¬
 $ Docker-Compose up -d
 
-# èµ·å‹•ã—ãŸã‚³ãƒ³ãƒ†ãƒŠã«ãƒ­ã‚°ã‚¤ãƒ³
+# ‹N“®‚µ‚½ƒRƒ“ƒeƒi‚ÉƒƒOƒCƒ“
 $ docker exec -it Docker-mysql_mysql_1 bash -p
 
-# MySQLã‚’èµ·å‹•
+# MySQL‚ð‹N“®
 $ mysql -u root -p -h 127.0.0.1
 
-# ã“ã®å¾Œãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å…¥åŠ›ã—ã¦å®Œäº†
+# ‚±‚ÌŒãƒpƒXƒ[ƒh‚ð“ü—Í‚µ‚ÄŠ®—¹
