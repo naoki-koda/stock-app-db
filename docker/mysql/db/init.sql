@@ -4,8 +4,6 @@
 -- ------------------------------------------------------
 -- Server version       5.1.51-debug-log
 
-/*ä»¥ä¸‹Databaseã®å†…å®¹ãŒè¨˜è¼‰ã•ã‚Œã‚‹*/
-
 Create Database stock;
 
 Create Table stock.company(
@@ -15,4 +13,4 @@ Create Table stock.company(
 	date  	    DATE   NOT NULL,
     PRIMARY KEY(code),
     UNIQUE KEY (code)
-) Comment 'æ ªä¸€è¦§æƒ…å ±';
+) Comment '“ŒØãêŠé‹Æƒe[ƒuƒ‹';
