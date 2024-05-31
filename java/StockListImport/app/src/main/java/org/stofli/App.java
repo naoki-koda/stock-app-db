@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 import org.stofli.DAO.StockCompanyDao;
 import org.stofli.Excel.TseExcel;
@@ -13,32 +14,30 @@ import org.stofli.HttpClient.JQuantClient;
 import org.stofli.Excel.Excel;
 import org.stofli.TSE.TseData;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpHeaders;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
+import java.io.InputStream;
 
 public class App {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
 
-        // imoprtTseCompnay();
+        Properties properties = new Properties();
+        try {
+            InputStream is = App.class.getClassLoader().getResourceAsStream("JQuants.properties");
+            properties.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // imoprtTseCompnayFromExcelData();
 
-        JQuantClient jquantClient = new JQuantClient();
-        jquantClient.getRefreshToken("naoki.koda1997@gmail.com", "Zxzx1234Adad4517");
-
-
-        
+        JQuantClient jquantClient = new JQuantClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
+        jquantClient.getDailyQuates("9432", "20240306");
 
     }
 
-    private static void imoprtTseCompnay() {
+    private static void imoprtTseCompnayFromExcelData() {
         Excel excelDataBook = new TseExcel("data_j.xls");
 
         List<TseData> dataList = excelDataBook.readData();
