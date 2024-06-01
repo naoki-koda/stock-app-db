@@ -2,12 +2,9 @@ package org.stofli.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.apache.poi.ss.formula.functions.T;
 import org.stofli.TSE.TseData;
 
@@ -64,8 +61,6 @@ public class StockCompanyDao implements Dao{
         String sql = "INSERT INTO stock.company (code, name, marketid, date) VALUES (?, ?, ?, ?)";
 
         PreparedStatement stmt = null;
-        ResultSet res = null;
-        Product pro = null;
 
         for(TseData data: dataList) {
             try {

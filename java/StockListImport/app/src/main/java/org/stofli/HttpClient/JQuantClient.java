@@ -1,15 +1,9 @@
 package org.stofli.HttpClient;
 
 import java.io.IOException;
-import java.net.HttpRetryException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

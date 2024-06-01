@@ -14,7 +14,6 @@ import org.stofli.HttpClient.JQuantClient;
 import org.stofli.Excel.Excel;
 import org.stofli.TSE.TseData;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -42,7 +41,7 @@ public class App {
 
         List<TseData> dataList = excelDataBook.readData();
 
-        String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
+        // String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
         String url = "jdbc:mysql://localhost:3306/stock";
 
         String user = "root";
