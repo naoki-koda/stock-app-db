@@ -1,4 +1,4 @@
-# stock-app
+# stock-app-db
 
 
 
@@ -7,9 +7,9 @@
 
 
 
-## ƒ}ƒXƒ^ƒf[ƒ^æ“¾Œ³
-E“ŒØãêŠé‹Æˆê——Fdata_j.xls
+## ãƒ‡ãƒ¼ã‚¿å–å¾—å…ƒ
+ãƒ»æ±è¨¼ä¸Šå ´ä¼æ¥­ä¸€è¦§ï¼šdata_j.xls
 https://www.jpx.co.jp/markets/statistics-equities/misc/01.html
 
-E“ŒØ‚ÌŠ”‰¿ƒf[ƒ^æ“¾API
+ãƒ»æ±è¨¼ã®æ ªä¾¡ãƒ‡ãƒ¼ã‚¿å–å¾—API
 https://jpx-jquants.com/
