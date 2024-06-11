@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Properties;
 
 import org.stofli.DAO.StockCompanyDao;
+import org.stofli.DAO.DailyQuatesDao;
 import org.stofli.Excel.TseExcel;
+import org.stofli.HttpClient.DailyQuates;
+import org.stofli.HttpClient.DailyQuates.DailyQuate;
 import org.stofli.HttpClient.JQuantClient;
 import org.stofli.Excel.Excel;
 import org.stofli.TSE.TseData;
@@ -19,9 +22,12 @@ import java.io.InputStream;
 
 public class App {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    private static Connection conn;
+    public static void main(String[] args) throws IOException, InterruptedException, Exception {
 
 
+        createMysqlConnection();
+        
         Properties properties = new Properties();
         try {
             InputStream is = App.class.getClassLoader().getResourceAsStream("JQuants.properties");
@@ -32,30 +38,36 @@ public class App {
         // imoprtTseCompnayFromExcelData();
 
         JQuantClient jquantClient = new JQuantClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
-        jquantClient.getDailyQuates("9432", "20240306");
+        DailyQuates dailyQuates = jquantClient.getDailyQuates("9432", "20240206", "20240306");
+        DailyQuatesDao scDao = new DailyQuatesDao(conn);
+        scDao.insert(dailyQuates.getDailyQuates());
 
+        // dailyQuates.getDa
     }
 
+    private static void createMysqlConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/stock";
+        String user = "root";
+        String password = "mysql";
+        conn = DriverManager.getConnection(url, user, password);
+    }
+    
     private static void imoprtTseCompnayFromExcelData() {
         Excel excelDataBook = new TseExcel("data_j.xls");
 
         List<TseData> dataList = excelDataBook.readData();
 
         // String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
-        String url = "jdbc:mysql://localhost:3306/stock";
 
-        String user = "root";
-        String password = "mysql";
 
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection conn = DriverManager.getConnection(url, user, password);
             StockCompanyDao scDao = new StockCompanyDao(conn);
             scDao.insert(dataList);
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

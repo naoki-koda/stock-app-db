@@ -14,3 +14,22 @@ Create Table stock.company(
     PRIMARY KEY(code),
     UNIQUE KEY (code)
 ) Comment '東証上場企業テーブル';
+
+Create Table stock.daily_quotes(
+    code  VARCHAR(10)  NOT NULL,
+    date  DATE NOT NULL,
+    open  DECIMAL(10.4)  NOT NULL,
+    high  DECIMAL(10.4)  NOT NULL,
+    low  DECIMAL(10.4)  NOT NULL,
+    close  DECIMAL(10.4)  NOT NULL,
+    upper_limit  VARCHAR(10)  NOT NULL,
+    lower_limit  VARCHAR(10)  NOT NULL,
+    volume DECIMAL(10.4)  NOT NULL,
+    turnover_value DECIMAL(15.4)  NOT NULL,
+    adjustment_factor DECIMAL(10.4)  NOT NULL,
+    adjustment_Open DECIMAL(10.4)  NOT NULL,
+    adjustment_High DECIMAL(10.4)  NOT NULL,
+    adjustment_low DECIMAL(10.4)  NOT NULL,
+    adjustment_Close DECIMAL(10.4)  NOT NULL,
+    adjustment_volume DECIMAL(10.4)  NOT NULL
+) Comment '株価データ(日次)';

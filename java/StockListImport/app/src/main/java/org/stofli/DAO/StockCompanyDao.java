@@ -4,14 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Collection;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.stofli.TSE.TseData;
 
 import com.google.common.base.Optional;
 
 
-public class StockCompanyDao implements Dao{
+
+public class StockCompanyDao implements Dao<TseData>{
 
     public Connection conn;
 
@@ -20,45 +21,45 @@ public class StockCompanyDao implements Dao{
     }
 
     @Override
-    public Optional<T> get(long id) {
+    public Optional<TseData> get(long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'get'");
     }
 
     @Override
-    public List<T> getAll() {
+    public List<TseData> getAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override
-    public void save(T t) {
+    public void save(TseData t) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Override
-    public void update(T t, String[] params) {
+    public void update(TseData t, String[] params) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
-    public void delete(T t) {
+    public void delete(TseData t) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
 
     @Override
-    public void insertBatch(T t) {
+    public void insertBatch(TseData t) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'insertBatch'");
     }
 
     @Override
-    public void insert(List<TseData> dataList) {
-        String sql = "INSERT INTO stock.company (code, name, marketid, date) VALUES (?, ?, ?, ?)";
+    public void insert(Collection<TseData> dataList) {
+       String sql = "INSERT INTO stock.company (code, name, marketid, date) VALUES (?, ?, ?, ?)";
 
         PreparedStatement stmt = null;
 
@@ -73,6 +74,6 @@ public class StockCompanyDao implements Dao{
             }catch (SQLException e){
                 System.out.println("SQLException:" + e.getMessage());
             }
-        }
+        } 
     }
 }

@@ -62,8 +62,9 @@ public class JQuantClient extends Http {
         }
     }
 
-    public void getDailyQuates(String code, String date) throws IOException, InterruptedException {
+    public DailyQuates getDailyQuates(String code, String date) throws IOException, InterruptedException, Exception {
 
+        DailyQuates dailyQuates;
         HttpRequest request = HttpRequest.newBuilder()
         .header("Authorization", "Bearer " + _idToken)
         .uri(URI.create("https://api.jquants.com/v1/prices/daily_quotes?code=" + code + "&date=" + date))
@@ -72,6 +73,33 @@ public class JQuantClient extends Http {
         HttpResponse<String> response =
                 _httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
+        if(response.statusCode() == HTTP_STATUS_CODE_OK) {
+            // System.out.println(response.body());
+            dailyQuates = _mapper.readValue(response.body(), DailyQuates.class);
+        } else {
+            throw new Exception(response.body());
+        }
+        return dailyQuates;
+    }
+
+    public DailyQuates getDailyQuates(String code, String from, String to) throws IOException, InterruptedException, Exception {
+
+        DailyQuates dailyQuates;
+        HttpRequest request = HttpRequest.newBuilder()
+        .header("Authorization", "Bearer " + _idToken)
+        .uri(URI.create("https://api.jquants.com/v1/prices/daily_quotes?code=" + code + "&from=" + from + "&to=" + to))
+        .build();
+
+        HttpResponse<String> response =
+                _httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if(response.statusCode() == HTTP_STATUS_CODE_OK) {
+            // System.out.println(response.body());
+            dailyQuates = _mapper.readValue(response.body(), DailyQuates.class);
+            System.out.println(response.body());
+        } else {
+            throw new Exception(response.body());
+        }
+        return dailyQuates;
     }
 }

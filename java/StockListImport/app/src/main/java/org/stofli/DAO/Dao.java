@@ -2,19 +2,19 @@ package org.stofli.DAO;
 
 
 import org.apache.poi.ss.formula.functions.T;
-import org.stofli.TSE.TseData;
 
 import java.util.List;
+import java.util.Collection;
 
 
 import com.google.common.base.Optional;
-public interface Dao {
+public interface Dao<T> {
 
     Optional<T> get(long id);
     
     List<T> getAll();
 
-    void insert(List<TseData> dataList);
+    void insert(Collection<T> dataList);
 
     void insertBatch(T t);
     
