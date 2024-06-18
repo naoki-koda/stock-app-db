@@ -12,7 +12,6 @@ import org.stofli.DAO.StockCompanyDao;
 import org.stofli.DAO.DailyQuatesDao;
 import org.stofli.Excel.TseExcel;
 import org.stofli.HttpClient.DailyQuates;
-import org.stofli.HttpClient.DailyQuates.DailyQuate;
 import org.stofli.HttpClient.JQuantClient;
 import org.stofli.Excel.Excel;
 import org.stofli.TSE.TseData;
