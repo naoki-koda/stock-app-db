@@ -1,10 +1,10 @@
-package org.stofli.HttpClient;
+package org.stofli.JQuants.config;
 
 public class JQuantsUser {
     public String mailaddress;
     public String password;
 
-    JQuantsUser(String mailadress, String password) {
+    public JQuantsUser(String mailadress, String password) {
         this.mailaddress = mailadress;
         this.password = password;
     }

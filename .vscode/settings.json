@@ -1,3 +1,5 @@
 {
-    "files.encoding": "shiftjis"
+    "files.autoGuessEncoding": true,
+    "java.jdt.ls.vmargs": "-noverify javac -J-Dfile.encoding=UTF-8 -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication",
+    
 }

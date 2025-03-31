@@ -1,4 +1,4 @@
-package org.stofli.HttpClient;
+package org.stofli.JQuants.dto;
 
 public class IdToken {
     public String idToken;

@@ -11,4 +11,6 @@ plugins {
 }
 
 rootProject.name = 'StockListImport'
+
+System.setProperty("file.encoding", "UTF-8")
 include('app')

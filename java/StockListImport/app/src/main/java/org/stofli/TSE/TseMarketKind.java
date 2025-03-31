@@ -1,16 +1,18 @@
 package org.stofli.TSE;
 
 public enum TseMarketKind {
-    PRIME_DOMESTIC(1,"ƒvƒ‰ƒCƒ€i“à‘Š”Ž®j"),
-    ETF_ETN(2,"ETFEETN"),
-    GROWTH_DOMESTIC(3,"ƒOƒ[ƒXi“à‘Š”Ž®j"),
+    PRIME_DOMESTIC(1,"ãƒ—ãƒ©ã‚¤ãƒ ï¼ˆå†…å›½æ ªå¼ï¼‰"),
+    ETF_ETN(2,"ETFãƒ»ETN"),
+    GROWTH_DOMESTIC(3,"ã‚°ãƒ­ãƒ¼ã‚¹ï¼ˆå†…å›½æ ªå¼ï¼‰"),
     PRO_MARKET(4, "PRO Market"),
-    STANDARD_DOMESTIC(5, "ƒXƒ^ƒ“ƒ_[ƒhi“à‘Š”Ž®j"),
-    PRIME_FOREIGN(6, "ƒvƒ‰ƒCƒ€iŠO‘Š”Ž®j"),
-    REIT(7, "REITEƒxƒ“ƒ`ƒƒ[ƒtƒ@ƒ“ƒhEƒJƒ“ƒgƒŠ[ƒtƒ@ƒ“ƒhEƒCƒ“ƒtƒ‰ƒtƒ@ƒ“ƒh"),
-    STANDARD_FOREIGN(8, "ƒXƒ^ƒ“ƒ_[ƒhiŠO‘Š”Ž®j"),
-    GROWTH_FOREIGN(9, "ƒOƒ[ƒXiŠO‘Š”Ž®j"),
-    EQUITY_SEQURITIES(10, "oŽ‘ØŒ”");
+    STANDARD_DOMESTIC(5, "ã‚¹ã‚¿ãƒ³ãƒ€ãƒ¼ãƒ‰ï¼ˆå†…å›½æ ªå¼ï¼‰"),
+    PRIME_FOREIGN(6, "ãƒ—ãƒ©ã‚¤ãƒ ï¼ˆå¤–å›½æ ªå¼ï¼‰"),
+    REIT(7, "REITãƒ»ãƒ™ãƒ³ãƒãƒ£ãƒ¼ãƒ•ã‚¡ãƒ³ãƒ‰ãƒ»ã‚«ãƒ³ãƒˆãƒªãƒ¼ãƒ•ã‚¡ãƒ³ãƒ‰ãƒ»ã‚¤ãƒ³ãƒ•ãƒ©ãƒ•ã‚¡ãƒ³ãƒ‰"),
+    STANDARD_FOREIGN(8, "ã‚¹ã‚¿ãƒ³ãƒ€ãƒ¼ãƒ‰ï¼ˆå¤–å›½æ ªå¼ï¼‰"),
+    GROWTH_FOREIGN(9, "ã‚°ãƒ­ãƒ¼ã‚¹ï¼ˆå¤–å›½æ ªå¼ï¼‰"),
+    EQUITY_SEQURITIES(10, "å‡ºè³‡è¨¼åˆ¸");
+
+
 
     private final int id;
     private final String name;

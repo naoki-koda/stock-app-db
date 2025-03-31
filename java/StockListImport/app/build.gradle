@@ -22,10 +22,10 @@ dependencies {
     // This dependency is used by the application.
     implementation libs.guava
 
-    //mysqlÚ‘±—pƒhƒ‰ƒCƒo
+    //mysqlæ¥ç¶šç”¨ãƒ‰ãƒ©ã‚¤ãƒ
     runtimeOnly 'mysql:mysql-connector-java:8.0.21'
 
-    //apache»EXCEL‘€ì—p
+    //apacheè£½EXCELæ“ä½œç”¨
     implementation('org.apache.poi:poi:4.1.2')
     implementation('org.apache.poi:poi-ooxml:4.1.2')
 

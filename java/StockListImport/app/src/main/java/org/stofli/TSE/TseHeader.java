@@ -1,10 +1,10 @@
 package org.stofli.TSE;
 
 public enum TseHeader {
-    DATE(0,"“ú•t"),
-    CODE(1,"ƒR[ƒh"),
-    NAME(2,"–Á•¿–¼"),
-    MARKET_KIND(3,"sêE¤•i‹æ•ª");
+    DATE(0,"æ—¥ä»˜"),
+    CODE(1,"ã‚³ãƒ¼ãƒ‰"),
+    NAME(2,"éŠ˜æŸ„å"),
+    MARKET_KIND(3,"å¸‚å ´ãƒ»å•†å“åŒºåˆ†");
 
     private int colNumber;
     private String headerText;

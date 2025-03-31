@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.apache.poi.ss.formula.functions.T;
 import org.stofli.TSE.TseData;
 
@@ -65,7 +64,6 @@ public class StockCompanyDao implements Dao{
 
         PreparedStatement stmt = null;
         ResultSet res = null;
-        Product pro = null;
 
         for(TseData data: dataList) {
             try {

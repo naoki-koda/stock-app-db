@@ -1,7 +1,5 @@
 package org.stofli.DAO;
 
-import java.sql.Connection;
-
 import org.apache.poi.ss.formula.functions.T;
 import org.stofli.TSE.TseData;
 

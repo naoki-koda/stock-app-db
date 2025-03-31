@@ -1,4 +1,4 @@
-package org.stofli.Excel;
+package org.stofli.TSE;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -7,9 +7,7 @@ import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.stofli.TSE.TseData;
-import org.stofli.TSE.TseHeader;
-import org.stofli.TSE.TseMarketKind;
+import org.stofli.Excel.Excel;
 
 public class TseExcel extends Excel {
 
@@ -25,7 +23,7 @@ public class TseExcel extends Excel {
         Sheet sheet = workbook.getSheetAt(FIRST_SHEET);
 
         Iterator<Row> rows = sheet.rowIterator();
-        //Excel��1�s�ڂ̓w�b�_�[���L�ڂ���Ă��邽�ߔ�΂��B
+        //Excelの1行目はヘッダーが記載されているため飛ばす。
         rows.next();
         while(rows.hasNext()) {
             Row row = rows.next();

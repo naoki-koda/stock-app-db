@@ -8,9 +8,9 @@ Create Database stock;
 
 Create Table stock.company(
     code  VARCHAR(10)  NOT NULL,
-    name  VARCHAR(10)  NOT NULL,
+    name  VARCHAR(100)  NOT NULL,
     marketid     int,
 	date  	    DATE   NOT NULL,
     PRIMARY KEY(code),
     UNIQUE KEY (code)
-) Comment '“ŒØãêŠé‹Æƒe[ƒuƒ‹';
+) Comment 'æ±è¨¼ä¸Šå ´ä¼æ¥­ãƒ†ãƒ¼ãƒ–ãƒ«';

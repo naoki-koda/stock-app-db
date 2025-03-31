@@ -1,4 +1,4 @@
-package org.stofli.HttpClient;
+package org.stofli.JQuants.client;
 
 import java.io.IOException;
 import java.net.HttpRetryException;
@@ -11,16 +11,24 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 
+import org.stofli.HttpClient.Http;
+import org.stofli.JQuants.config.JQuantsUser;
+import org.stofli.JQuants.dto.DailyQuote;
+import org.stofli.JQuants.dto.IdToken;
+import org.stofli.JQuants.dto.QuoteResponse;
+import org.stofli.JQuants.dto.ResponseRefreshToken;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-public class JQuantClient extends Http {
+public class ApiClient extends Http {
 
     private ObjectMapper _mapper = new ObjectMapper();
     private ResponseRefreshToken _resRefreshToken;
     private IdToken _idToken;
 
-    public JQuantClient(String mailAdress, String password) {
+    public ApiClient(String mailAdress, String password) {
         try {
             getRefreshToken(mailAdress, password);
         } catch (Exception e) {
@@ -78,6 +86,16 @@ public class JQuantClient extends Http {
         HttpResponse<String> response =
                 _httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            QuoteResponse quotesRespons = objectMapper.readValue(response.body(), QuoteResponse.class);
+            List<DailyQuote> list= quotesRespons.getDailyQuotes();
+            for (DailyQuote quote : list) {
+                System.out.println("Code: " + quote.date() + ", Close Price: " + quote);
+            }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 }

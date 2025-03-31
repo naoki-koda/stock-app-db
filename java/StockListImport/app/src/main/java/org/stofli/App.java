@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Properties;
 
 import org.stofli.DAO.StockCompanyDao;
-import org.stofli.Excel.TseExcel;
-import org.stofli.HttpClient.JQuantClient;
 import org.stofli.Excel.Excel;
+import org.stofli.JQuants.client.ApiClient;
+import org.stofli.TSE.TseExcel;
 import org.stofli.TSE.TseData;
 
 import java.io.FileInputStream;
@@ -32,8 +32,9 @@ public class App {
         }
         // imoprtTseCompnayFromExcelData();
 
-        JQuantClient jquantClient = new JQuantClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
+        ApiClient jquantClient = new ApiClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
         jquantClient.getDailyQuates("9432", "20240306");
+        jquantClient.getDailyQuates("1332", "20240306");
 
     }
 
@@ -42,7 +43,6 @@ public class App {
 
         List<TseData> dataList = excelDataBook.readData();
 
-        String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
         String url = "jdbc:mysql://localhost:3306/stock";
 
         String user = "root";
