@@ -5,4 +5,4 @@ Create Table stock.company(
 	date  	  DATE   NOT NULL,
     PRIMARY KEY(code),
     UNIQUE KEY (code)
-) Comment 'ãêŠé‹Æƒe[ƒuƒ‹';
+) Comment 'ä¸Šå ´ä¼æ¥­ãƒ†ãƒ¼ãƒ–ãƒ«';

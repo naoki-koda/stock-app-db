@@ -6,4 +6,3 @@ Create Table stock.market(
     PRIMARY KEY(id),
     UNIQUE KEY (id)
 ) Comment 'マーケット区分管理テーブル';
-
