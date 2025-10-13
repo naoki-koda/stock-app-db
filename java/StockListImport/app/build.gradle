@@ -8,6 +8,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'java'
+    id 'eclipse'
 }
 
 repositories {
@@ -16,6 +18,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
     // Use JUnit test framework.
     testImplementation('junit:junit:4.13')
 
@@ -24,6 +27,7 @@ dependencies {
 
     //mysql接続用ドライバ
     runtimeOnly 'mysql:mysql-connector-java:8.0.21'
+    implementation 'org.postgresql:postgresql:42.7.3'
 
     //apache製EXCEL操作用
     implementation('org.apache.poi:poi:4.1.2')
@@ -45,8 +49,11 @@ java {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
-
+tasks.named("run") {
+    workingDir = projectDir // プロジェクトルートから実行
+}
 application {
     // Define the main class for the application.
     mainClass = 'org.example.App'
 }
+

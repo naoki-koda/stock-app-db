@@ -1,22 +1,18 @@
-package org.stofli.JQuants.client;
+package org.stofli.jquants.client;
 
 import java.io.IOException;
-import java.net.HttpRetryException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-import org.stofli.HttpClient.Http;
-import org.stofli.JQuants.config.JQuantsUser;
-import org.stofli.JQuants.dto.DailyQuote;
-import org.stofli.JQuants.dto.IdToken;
-import org.stofli.JQuants.dto.QuoteResponse;
-import org.stofli.JQuants.dto.ResponseRefreshToken;
+import org.stofli.httpclient.Http;
+import org.stofli.jquants.config.JQuantsUser;
+import org.stofli.jquants.dto.DailyQuote;
+import org.stofli.jquants.dto.IdToken;
+import org.stofli.jquants.dto.QuoteResponse;
+import org.stofli.jquants.dto.ResponseRefreshToken;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,8 +72,7 @@ public class ApiClient extends Http {
         }
     }
 
-    public void getDailyQuates(String code, String date) throws IOException, InterruptedException {
-
+    public Optional<QuoteResponse> getDailyQuates(String code, String date) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
         .header("Authorization", "Bearer " + _idToken)
         .uri(URI.create("https://api.jquants.com/v1/prices/daily_quotes?code=" + code + "&date=" + date))
@@ -89,13 +84,11 @@ public class ApiClient extends Http {
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            QuoteResponse quotesRespons = objectMapper.readValue(response.body(), QuoteResponse.class);
-            List<DailyQuote> list= quotesRespons.getDailyQuotes();
-            for (DailyQuote quote : list) {
-                System.out.println("Code: " + quote.date() + ", Close Price: " + quote);
-            }
+            QuoteResponse result = objectMapper.readValue(response.body(), QuoteResponse.class);
+            return Optional.of(result);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            return Optional.empty();
         }
     }
 }

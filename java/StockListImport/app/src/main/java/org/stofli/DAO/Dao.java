@@ -1,21 +1,17 @@
-package org.stofli.DAO;
+package org.stofli.dao;
 
-import org.apache.poi.ss.formula.functions.T;
-import org.stofli.TSE.TseData;
-
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+public interface Dao<T> {
 
-
-import com.google.common.base.Optional;
-public interface Dao {
-
-    Optional<T> get(long id);
+    Optional<T> get(long id) throws SQLException;
     
     List<T> getAll();
 
-    void insert(List<TseData> dataList);
+    void insert(T t) throws SQLException;
 
-    void insertBatch(T t);
+    void insertBatch(List<T> tList) throws SQLException;
     
     void save(T t);
     

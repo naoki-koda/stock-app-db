@@ -1,4 +1,4 @@
-package org.stofli.JQuants.dto;
+package org.stofli.jquants.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;

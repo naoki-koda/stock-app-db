@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}",
+      "projectName": "app",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      // jdtlsが自動生成した設定もここに明示的に記述します
+      "type": "java",
+      "name": "Launch App (JDTLS)", // 分かりやすいように名前をつけます
+      "request": "launch",
+      "mainClass": "org.stofli.App",
+      "projectName": "app",
+      // こちらにもCWDを指定するのが重要です
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

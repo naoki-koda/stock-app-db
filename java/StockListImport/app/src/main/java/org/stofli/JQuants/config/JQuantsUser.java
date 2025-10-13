@@ -1,4 +1,4 @@
-package org.stofli.JQuants.config;
+package org.stofli.jquants.config;
 
 public class JQuantsUser {
     public String mailaddress;
