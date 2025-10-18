@@ -6,12 +6,15 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.stofli.dao.Dao;
 import org.stofli.tse.model.TseData;
+import org.stofli.util.DbUtil;
 
-public class StockCompanyDao implements Dao<TseData> {
+public class StockCompanyDao implements Dao<TseData, Long> {
 
     public Connection conn;
 
@@ -20,39 +23,27 @@ public class StockCompanyDao implements Dao<TseData> {
     }
 
     @Override
-    public Optional<TseData> get(long id) {
-        // TODO Auto-generated method stub
+    public Optional<TseData> get(long id) throws SQLException {
         throw new UnsupportedOperationException("Unimplemented method 'get'"); 
-        // return Optional.empty();
     }
 
     @Override
-    public List<TseData> getAll() {
-        // TODO Auto-generated method stub
+    public    List<TseData> findAll(int limit, int offset) throws SQLException {
         throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override
-    public void save(TseData t) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
-
-    @Override
-    public void update(TseData t, String[] params) {
-        // TODO Auto-generated method stub
+    public int update(TseData t, String[] params) {
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
-    public void delete(TseData t) {
-        // TODO Auto-generated method stub
+    public int deleteById(Long id) throws SQLException {
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
-
     @Override
-    public void insertBatch(List<TseData> tList) throws SQLException {
+    public int[] insertBatch(List<TseData> tList) throws SQLException {
         String sql = "INSERT INTO company (code, name, marketid, date) VALUES (?, ?, ?, ?)";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -64,13 +55,31 @@ public class StockCompanyDao implements Dao<TseData> {
                 stmt.setDate(4, java.sql.Date.valueOf(localDate));
                 stmt.addBatch();
             }
-            stmt.executeBatch();
+            return stmt.executeBatch();
         }
     }
 
     @Override
-    public void insert(TseData t) throws SQLException {
-        insertBatch(List.of(t));
+    public int insert(TseData t) throws SQLException {
+        return insertBatch(List.of(t))[0];
+    }
+
+    @Override
+    public int partialUpdate(Long id, Map<String, Object> fields) throws SQLException {
+        if (fields.isEmpty()) return 0;
+        String set = fields.keySet().stream()
+                .map(k -> k + "=?")
+                .collect(Collectors.joining(", "));
+        String sql = "UPDATE company SET " + set + " WHERE id=?";
+        try (Connection con = DbUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            int idx = 1;
+            for (Object v : fields.values()) {
+                ps.setObject(idx++, v);
+                ps.setLong(idx, id);
+            }
+            return ps.executeUpdate();
+        }
     }
 
     public void truncateTable() throws SQLException {
@@ -78,5 +87,10 @@ public class StockCompanyDao implements Dao<TseData> {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.execute();
         }
+    }
+
+    @Override
+    public Optional<TseData> get(Long id) throws SQLException {
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
     }
 }
