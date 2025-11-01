@@ -1,4 +1,4 @@
-package org.stofli.jquants.util;
+package org.stofli.jquants.infrastructure.config;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +24,7 @@ public class PropertiesUtil {
         } catch (IOException e) {
             throw new RuntimeException("プロパティファイルの読み込みに失敗しました: " + filename, e);
         }
+
         return props;
     }
 }

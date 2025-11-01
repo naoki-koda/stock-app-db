@@ -4,41 +4,26 @@
 package org.stofli;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.List;
-import java.util.Properties;
 
-import org.stofli.jquants.client.ApiClient;
-import org.stofli.tse.model.TseData;
-import org.stofli.tse.service.TseService;
-import org.stofli.util.DbUtil;
+import org.stofli.application.service.TseDataImportService;
+import org.stofli.domain.model.ExcelFilePath;
+import org.stofli.infrastructure.repository.TseDataRepositoryImpl;
 
 
 public class App {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        try (Connection conn = DbUtil.getConnection()) {
-            TseService service = new TseService(conn);
-            service.truncateTable();
-            List<TseData> dataList = service.importFromExcel("data_j.xls");
-            service.saveToDatabase(dataList);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-        Properties properties = new Properties();
-        // try {
-        //     InputStream is = App.class.getClassLoader().getResourceAsStream("JQuants.properties");
-        //     properties.load(is);
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
-        // imoprtTseCompnayFromExcelData();
+        TseDataRepositoryImpl repo = new TseDataRepositoryImpl();
+        TseDataImportService service = new TseDataImportService(repo);
+        int count = service.importFrom(new ExcelFilePath("data_j.xls"));
+        System.out.println("Imported rows: " + count);
+        // Properties properties = PropertiesUtil.loadProperties("JQuants.properties");
 
-        ApiClient jquantClient = new ApiClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
-        jquantClient.getDailyQuates("9432", "20240306");
-        jquantClient.getDailyQuates("1332", "20240306");
+        // ApiClient jquantClient = new ApiClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
+        // Optional<QuoteResponse> qr = jquantClient.getDailyQuates("9432", "20240306");
+        
+        // Optional<DailyQuote> qr = jquantClient.getDailyQuates("1332", "20240306");
 
 
      // private static void imoprtTseCompnayFromExcelData() {
@@ -51,6 +36,7 @@ public class App {
         // String pass = dotenv.get("NEON_PASSWORD");
         // String uri = dotenv.get("NEON_URI");
         // Excel excelDataBook = new TseExcel("data_j.xls");
+        
         //
         // List<TseData> dataList = excelDataBook.readData();
         //
@@ -70,5 +56,5 @@ public class App {
         // } catch (SQLException | ClassNotFoundException e) {
         // e.printStackTrace();
         // }
-    // }
+    }
 }

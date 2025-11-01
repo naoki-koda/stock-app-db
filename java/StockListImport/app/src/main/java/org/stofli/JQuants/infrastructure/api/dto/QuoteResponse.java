@@ -1,4 +1,4 @@
-package org.stofli.jquants.dto;
+package org.stofli.jquants.infrastructure.api.dto;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ public class QuoteResponse {
     private List<DailyQuote> dailyQuotes;
     
     public List<DailyQuote> getDailyQuotes() {
-        return dailyQuotes;
+        return dailyQuotes == null ? List.of() : dailyQuotes;
     }
 }

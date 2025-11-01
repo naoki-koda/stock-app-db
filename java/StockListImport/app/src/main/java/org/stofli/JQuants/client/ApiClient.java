@@ -7,12 +7,13 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
+import org.stofli.domain.model.DailyQuote;
 import org.stofli.httpclient.Http;
 import org.stofli.jquants.config.JQuantsUser;
-import org.stofli.jquants.dto.DailyQuote;
 import org.stofli.jquants.dto.IdToken;
-import org.stofli.jquants.dto.QuoteResponse;
+import org.stofli.jquants.dto.QuoteResponseDto;
 import org.stofli.jquants.dto.ResponseRefreshToken;
+import org.stofli.jquants.mapper.QuoteMapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,7 +73,7 @@ public class ApiClient extends Http {
         }
     }
 
-    public Optional<QuoteResponse> getDailyQuates(String code, String date) throws IOException, InterruptedException {
+    public Optional<DailyQuote> getDailyQuates(String code, String date) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
         .header("Authorization", "Bearer " + _idToken)
         .uri(URI.create("https://api.jquants.com/v1/prices/daily_quotes?code=" + code + "&date=" + date))
@@ -84,8 +85,11 @@ public class ApiClient extends Http {
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            QuoteResponse result = objectMapper.readValue(response.body(), QuoteResponse.class);
-            return Optional.of(result);
+            QuoteResponseDto dto = objectMapper.readValue(response.body(), QuoteResponseDto.class);
+            List<DailyQuote> quotes = QuoteMapper.toDomain(dto.getDailyQuotes());
+            // return Optional.of(quotes);
+            // return Optional.of(quotes.get(1));
+            return QuoteMapper.toDomain(dto.getDailyQuotes()).stream().findFirst();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return Optional.empty();
