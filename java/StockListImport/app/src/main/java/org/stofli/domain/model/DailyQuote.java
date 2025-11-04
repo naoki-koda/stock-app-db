@@ -1,5 +1,7 @@
 package org.stofli.domain.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -8,42 +10,42 @@ import java.util.Objects;
  */
 public class DailyQuote {
 
-    private final String date;
+    private final LocalDate date;
     private final String code;
-    private final double open;
-    private final double high;
-    private final double low;
-    private final double close;
-    private final Double upperLimit;
-    private final Double lowerLimit;
-    private final double volume;
-    private final double turnoverValue;
-    private final double adjustmentFactor;
-    private final double adjustmentOpen;
-    private final double adjustmentHigh;
-    private final double adjustmentLow;
-    private final double adjustmentClose;
-    private final double adjustmentVolume;
+    private final BigDecimal open;
+    private final BigDecimal high;
+    private final BigDecimal low;
+    private final BigDecimal close;
+    private final BigDecimal upperLimit;
+    private final BigDecimal lowerLimit;
+    private final BigDecimal volume;
+    private final BigDecimal turnoverValue;
+    private final BigDecimal adjustmentFactor;
+    private final BigDecimal adjustmentOpen;
+    private final BigDecimal adjustmentHigh;
+    private final BigDecimal adjustmentLow;
+    private final BigDecimal adjustmentClose;
+    private final BigDecimal adjustmentVolume;
 
     public DailyQuote(
-        String date,
+        LocalDate date,
         String code,
-        double open,
-        double high,
-        double low,
-        double close,
-        Double upperLimit,
-        Double lowerLimit,
-        double volume,
-        double turnoverValue,
-        double adjustmentFactor,
-        double adjustmentOpen,
-        double adjustmentHigh,
-        double adjustmentLow,
-        double adjustmentClose,
-        double adjustmentVolume
+        BigDecimal open,
+        BigDecimal high,
+        BigDecimal low,
+        BigDecimal close,
+        BigDecimal upperLimit,
+        BigDecimal lowerLimit,
+        BigDecimal volume,
+        BigDecimal turnoverValue,
+        BigDecimal adjustmentFactor,
+        BigDecimal adjustmentOpen,
+        BigDecimal adjustmentHigh,
+        BigDecimal adjustmentLow,
+        BigDecimal adjustmentClose,
+        BigDecimal adjustmentVolume
     ) {
-        this.date = date.toString();
+        this.date = date;
         this.code = Objects.requireNonNull(code);
         this.open = open;
         this.high = high;
@@ -61,22 +63,22 @@ public class DailyQuote {
         this.adjustmentVolume = adjustmentVolume;
     }
 
-    public String getDate() { return date; }
+    public LocalDate getDate() { return date; }
     public String getCode() { return code; }
-    public double getOpen() { return open; }
-    public double getHigh() { return high; }
-    public double getLow() { return low; }
-    public double getClose() { return close; }
-    public Double getUpperLimit() { return upperLimit; }
-    public Double getLowerLimit() { return lowerLimit; }
-    public double getVolume() { return volume; }
-    public double getTurnoverValue() { return turnoverValue; }
-    public double getAdjustmentFactor() { return adjustmentFactor; }
-    public double getAdjustmentOpen() { return adjustmentOpen; }
-    public double getAdjustmentHigh() { return adjustmentHigh; }
-    public double getAdjustmentLow() { return adjustmentLow; }
-    public double getAdjustmentClose() { return adjustmentClose; }
-    public double getAdjustmentVolume() { return adjustmentVolume; }
+    public BigDecimal getOpen() { return open; }
+    public BigDecimal getHigh() { return high; }
+    public BigDecimal getLow() { return low; }
+    public BigDecimal getClose() { return close; }
+    public BigDecimal getUpperLimit() { return upperLimit; }
+    public BigDecimal getLowerLimit() { return lowerLimit; }
+    public BigDecimal getVolume() { return volume; }
+    public BigDecimal getTurnoverValue() { return turnoverValue; }
+    public BigDecimal getAdjustmentFactor() { return adjustmentFactor; }
+    public BigDecimal getAdjustmentOpen() { return adjustmentOpen; }
+    public BigDecimal getAdjustmentHigh() { return adjustmentHigh; }
+    public BigDecimal getAdjustmentLow() { return adjustmentLow; }
+    public BigDecimal getAdjustmentClose() { return adjustmentClose; }
+    public BigDecimal getAdjustmentVolume() { return adjustmentVolume; }
 
     @Override
     public String toString() {

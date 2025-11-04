@@ -5,25 +5,47 @@ package org.stofli;
 
 import java.io.IOException;
 
-import org.stofli.application.service.TseDataImportService;
-import org.stofli.domain.model.ExcelFilePath;
-import org.stofli.infrastructure.repository.TseDataRepositoryImpl;
+import org.stofli.adopter.webapi.auth.JQuantsTokenProvider;
+import org.stofli.adopter.webapi.auth.PropertiesCredentialProvider;
+import org.stofli.adopter.webapi.auth.core.TokenProvider;
+import org.stofli.adopter.webapi.jquants.JQuantsClient;
+import org.stofli.domain.port.MarketDataClient;
 
 
 public class App {
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        try {
 
-        TseDataRepositoryImpl repo = new TseDataRepositoryImpl();
-        TseDataImportService service = new TseDataImportService(repo);
-        int count = service.importFrom(new ExcelFilePath("data_j.xls"));
-        System.out.println("Imported rows: " + count);
-        // Properties properties = PropertiesUtil.loadProperties("JQuants.properties");
+            // TseDataRepository tseDataRepository = new TseDataRepositoryImpl();
+            // TseDataImportService service = new TseDataImportService(repo);
+            // int count = service.importFrom(new ExcelFilePath("data_j.xls"));
+            // System.out.println("Imported rows: " + count);
+            // Properties properties = PropertiesUtil.loadProperties("JQuants.properties");
 
-        // ApiClient jquantClient = new ApiClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
-        // Optional<QuoteResponse> qr = jquantClient.getDailyQuates("9432", "20240306");
-        
-        // Optional<DailyQuote> qr = jquantClient.getDailyQuates("1332", "20240306");
+            // ApiClient jquantClient = new ApiClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
+            // Optional<DailyQuote> qr = jquantClient.getDailyQuates("9432", "20240306");
+            
+            // Optional<DailyQuote> qr = jquantClient.getDailyQuates("1332", "20240306");
+
+
+
+
+            PropertiesCredentialProvider credentialProvider = new PropertiesCredentialProvider();
+            TokenProvider tokenProvider = new JQuantsTokenProvider(credentialProvider);
+            MarketDataClient marketDataClient = new JQuantsClient(tokenProvider);
+
+            // var conn               = DbUtil.getConnection();
+            // var companyRepository  = new JdbcCompanyRepository(conn);     // implements CompanyRepository
+            // var dailyQuoteRepo     = new JdbcDailyQuoteRepository(conn);  // implements DailyQuoteRepository
+
+            // var appService = new DailyQuoteApplicationService(tseDataRepository, dailyQuoteRepo, marketDataClient);
+
+            // 実行
+            // appService.importAllCompany(LocalDate.now());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
      // private static void imoprtTseCompnayFromExcelData() {

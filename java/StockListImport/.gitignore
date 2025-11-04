@@ -7,3 +7,5 @@ build
 app\src\main\resources\JQuants.properties
 bin
 .env
+
+org.eclipse.buildship.core.prefs
