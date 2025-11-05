@@ -1,16 +1,14 @@
 package org.stofli.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * ドメイン層の「日次株価」エンティティ（または値オブジェクト）。
- * 外部APIやJSON形式に依存しない純粋なモデル。
+ * 日次株価の値オブジェクト
  */
 public class DailyQuote {
 
-    private final LocalDate date;
+    private final String date;
     private final String code;
     private final BigDecimal open;
     private final BigDecimal high;
@@ -28,7 +26,7 @@ public class DailyQuote {
     private final BigDecimal adjustmentVolume;
 
     public DailyQuote(
-        LocalDate date,
+        String date,
         String code,
         BigDecimal open,
         BigDecimal high,
@@ -63,7 +61,7 @@ public class DailyQuote {
         this.adjustmentVolume = adjustmentVolume;
     }
 
-    public LocalDate getDate() { return date; }
+    public String getDate() { return date; }
     public String getCode() { return code; }
     public BigDecimal getOpen() { return open; }
     public BigDecimal getHigh() { return high; }

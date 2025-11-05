@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/*
+ * 東証一部上場企業一覧excelに記載されている日付列の値を表す値オブジェクト
+ */
 public class RegistrationDate {
     private final LocalDate value;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");

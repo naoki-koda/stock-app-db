@@ -6,6 +6,6 @@ import org.stofli.domain.model.CompanyCode;
 import org.stofli.domain.model.DailyQuote;
 
 public interface DailyQuoteRepository {
-    void saveAll(List<DailyQuote> dataList);
+    int saveAll(List<DailyQuote> dataList);
     void deleteByCode(CompanyCode code);
 }

@@ -2,6 +2,10 @@ package org.stofli.domain.model;
 
 import java.util.Objects;
 
+/**
+ * Excelファイルのパスを表す値オブジェクト
+ * Todo: ドメインのValueObjectとして適切か検討する
+ */
 public class ExcelFilePath {
     private String filePath;
 

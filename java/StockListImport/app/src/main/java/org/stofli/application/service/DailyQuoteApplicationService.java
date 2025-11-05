@@ -6,15 +6,18 @@ import java.util.List;
 import org.stofli.domain.model.CompanyCode;
 import org.stofli.domain.model.DailyQuote;
 import org.stofli.domain.port.MarketDataClient;
+import org.stofli.domain.repository.DailyQuoteRepository;
 import org.stofli.domain.repository.TseDataRepository;
 
 public class DailyQuoteApplicationService {
 
     private final TseDataRepository tseDataRepository;
+    private final DailyQuoteRepository dailyQuotdeRepository;
     private final MarketDataClient marketDataClient;
 
-    public DailyQuoteApplicationService(TseDataRepository tseDataRepository, MarketDataClient marketDataClient) {
+    public DailyQuoteApplicationService(TseDataRepository tseDataRepository, DailyQuoteRepository dailyQuotdeRepository, MarketDataClient marketDataClient) {
         this.tseDataRepository = tseDataRepository;
+        this.dailyQuotdeRepository = dailyQuotdeRepository;
         this.marketDataClient = marketDataClient;
     }
 
@@ -24,10 +27,7 @@ public class DailyQuoteApplicationService {
 
         for (CompanyCode code : codes) {
             List<DailyQuote> quotes = marketDataClient.fetchDailyQuotes(code.value(), asOfDate);
-            for (DailyQuote q : quotes) {
-                // upsert/重複スキップは Repository 側の責務で吸収
-                // registered += dailyQuotdeRepository.save(q); 
-            }
+            registered = dailyQuotdeRepository.saveAll(quotes); 
         }
         return registered;
     }

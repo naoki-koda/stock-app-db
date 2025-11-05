@@ -4,12 +4,18 @@
 package org.stofli;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
-import org.stofli.adopter.webapi.auth.JQuantsTokenProvider;
-import org.stofli.adopter.webapi.auth.PropertiesCredentialProvider;
-import org.stofli.adopter.webapi.auth.core.TokenProvider;
-import org.stofli.adopter.webapi.jquants.JQuantsClient;
+import org.stofli.adapter.database.repository.DailyQuoteRepositoryImpl;
+import org.stofli.adapter.database.repository.TseDataRepositoryImpl;
+import org.stofli.adapter.webapi.auth.JQuantsTokenProvider;
+import org.stofli.adapter.webapi.auth.PropertiesCredentialProvider;
+import org.stofli.adapter.webapi.auth.core.TokenProvider;
+import org.stofli.adapter.webapi.jquants.JQuantsClient;
+import org.stofli.application.service.DailyQuoteApplicationService;
 import org.stofli.domain.port.MarketDataClient;
+import org.stofli.domain.repository.DailyQuoteRepository;
+import org.stofli.domain.repository.TseDataRepository;
 
 
 public class App {
@@ -17,66 +23,23 @@ public class App {
     public static void main(String[] args) throws IOException, InterruptedException {
         try {
 
-            // TseDataRepository tseDataRepository = new TseDataRepositoryImpl();
-            // TseDataImportService service = new TseDataImportService(repo);
+            TseDataRepository tseDataRepository = new TseDataRepositoryImpl();
+            DailyQuoteRepository dailyQuoteRepository = new DailyQuoteRepositoryImpl(); // new JdbcDailyQuoteRepository(DbUtil.getConnection());
+            // TseDataImportService service = new TseDataImportService(tseDataRepository);
             // int count = service.importFrom(new ExcelFilePath("data_j.xls"));
             // System.out.println("Imported rows: " + count);
-            // Properties properties = PropertiesUtil.loadProperties("JQuants.properties");
-
-            // ApiClient jquantClient = new ApiClient(properties.getProperty("mailAdress"), properties.getProperty("password"));
-            // Optional<DailyQuote> qr = jquantClient.getDailyQuates("9432", "20240306");
-            
-            // Optional<DailyQuote> qr = jquantClient.getDailyQuates("1332", "20240306");
-
 
 
 
             PropertiesCredentialProvider credentialProvider = new PropertiesCredentialProvider();
             TokenProvider tokenProvider = new JQuantsTokenProvider(credentialProvider);
             MarketDataClient marketDataClient = new JQuantsClient(tokenProvider);
+            DailyQuoteApplicationService dqService = new DailyQuoteApplicationService(tseDataRepository, dailyQuoteRepository, marketDataClient);
+            LocalDate date = LocalDate.of(2024, 3, 6);
+            dqService.importAllCompany(date);
 
-            // var conn               = DbUtil.getConnection();
-            // var companyRepository  = new JdbcCompanyRepository(conn);     // implements CompanyRepository
-            // var dailyQuoteRepo     = new JdbcDailyQuoteRepository(conn);  // implements DailyQuoteRepository
-
-            // var appService = new DailyQuoteApplicationService(tseDataRepository, dailyQuoteRepo, marketDataClient);
-
-            // 実行
-            // appService.importAllCompany(LocalDate.now());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-     // private static void imoprtTseCompnayFromExcelData() {
-        // Dotenv dotenv = Dotenv.load(); // .envを読み込む
-        //
-        // String host = dotenv.get("NEON_HOST");
-        // String port = dotenv.get("NEON_PORT");
-        // String db = dotenv.get("NEON_DB");
-        // String user = dotenv.get("NEON_USER");
-        // String pass = dotenv.get("NEON_PASSWORD");
-        // String uri = dotenv.get("NEON_URI");
-        // Excel excelDataBook = new TseExcel("data_j.xls");
-        
-        //
-        // List<TseData> dataList = excelDataBook.readData();
-        //
-        // // String url = "jdbc:mysql://localhost:3306/stock";
-        // // uri = uri.replace("postgresql://","jdbc:postgresql://");
-        // String url = "jdbc:postgresql://" + host + ":5432/" + db + "?sslmode=require";
-        //
-        // try {
-        //
-        // // Class.forName("com.mysql.cj.jdbc.Driver");
-        // Class.forName("org.postgresql.Driver");
-        //
-        // Connection conn = DriverManager.getConnection(url, user, pass);
-        // StockCompanyDao scDao = new StockCompanyDao(conn);
-        // scDao.insert(dataList);
-        //
-        // } catch (SQLException | ClassNotFoundException e) {
-        // e.printStackTrace();
-        // }
     }
 }
