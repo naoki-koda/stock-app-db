@@ -9,6 +9,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class DbUtil {
 
     private DbUtil() {}
+
     private static DBConfig dbConfig = load();
     
     public static Connection getConnection() throws SQLException {

@@ -2,6 +2,7 @@ package org.stofli.adapter.webapi.jquants;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
@@ -36,6 +37,7 @@ public class JQuantsClient extends Http implements MarketDataClient {
   public List<DailyQuote> fetchDailyQuotes(String code, LocalDate date) throws IOException, InterruptedException {
     IdToken idToken = jquantsTokenProvider.obtainToken();
     HttpRequest request = HttpRequest.newBuilder()
+                                      .version(HttpClient.Version.HTTP_1_1)
                                       .header("Authorization", "Bearer " + idToken.toString())
                                       .uri(URI.create("https://api.jquants.com/v1/prices/daily_quotes?code=" + code + "&date=" + date))
                                       .build();

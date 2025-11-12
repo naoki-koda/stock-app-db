@@ -9,7 +9,7 @@ import java.util.Objects;
 public class DailyQuote {
 
     private final String date;
-    private final String code;
+    private final CompanyCode code;
     private final BigDecimal open;
     private final BigDecimal high;
     private final BigDecimal low;
@@ -27,7 +27,7 @@ public class DailyQuote {
 
     public DailyQuote(
         String date,
-        String code,
+        CompanyCode code,
         BigDecimal open,
         BigDecimal high,
         BigDecimal low,
@@ -62,7 +62,7 @@ public class DailyQuote {
     }
 
     public String getDate() { return date; }
-    public String getCode() { return code; }
+    public CompanyCode getCode() { return code; }
     public BigDecimal getOpen() { return open; }
     public BigDecimal getHigh() { return high; }
     public BigDecimal getLow() { return low; }

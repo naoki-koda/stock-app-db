@@ -3,6 +3,7 @@ package org.stofli.adapter.webapi.jquants.mapper;
 import java.util.List;
 
 import org.stofli.adapter.webapi.jquants.dto.DailyQuoteDto;
+import org.stofli.domain.model.CompanyCode;
 import org.stofli.domain.model.DailyQuote;
 
 public final class QuoteMapper {
@@ -16,9 +17,10 @@ public final class QuoteMapper {
     }
 
     public static DailyQuote toDomain(DailyQuoteDto dto) {
+        CompanyCode code = new CompanyCode(dto.getCode());
         return new DailyQuote(
             dto.getDate(),
-            dto.getCode(),
+            code,
             dto.getOpen(),
             dto.getHigh(),
             dto.getLow(),
@@ -34,16 +36,5 @@ public final class QuoteMapper {
             dto.getAdjustmentClose(),
             dto.getAdjustmentVolume()
         );
-    }
-
-    private static Double parseNullableDouble(String value) {
-        try {
-            return value == null || value.isEmpty() ? null : Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
-    private static double safeDouble(Double value) {
-        return value == null ? 0.0 : value;
     }
 }

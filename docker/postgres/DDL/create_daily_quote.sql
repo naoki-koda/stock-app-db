@@ -18,4 +18,8 @@ CREATE TABLE daily_quotes (
   adjustment_volume NUMERIC(20,0),
 
   CONSTRAINT uq_daily_quotes UNIQUE (date, code)
+  CONSTRAINT fk_daily_quotes_company
+    FOREIGN KEY (code)
+    REFERENCES company(code)
+    ON DELETE NO ACTION;
 );
